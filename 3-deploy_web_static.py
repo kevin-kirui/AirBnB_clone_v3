@@ -7,14 +7,15 @@ distributes an archive to the web servers
 from fabric.api import env, local, put, run
 from datetime import datetime
 from os.path import exists, isdir
+
 env.hosts = ['142.44.167.228', '144.217.246.195']
 
 
 def do_pack():
-    """generates a tgz archive"""
+    """Generates a tgz archive"""
     try:
         date = datetime.now().strftime("%Y%m%d%H%M%S")
-        if isdir("versions") is False:
+        if not isdir("versions"):
             local("mkdir versions")
         file_name = "versions/web_static_{}.tgz".format(date)
         local("tar -cvzf {} web_static".format(file_name))
@@ -24,8 +25,8 @@ def do_pack():
 
 
 def do_deploy(archive_path):
-    """distributes an archive to the web servers"""
-    if exists(archive_path) is False:
+    """Distributes an archive to the web servers"""
+    if not exists(archive_path):
         return False
     try:
         file_n = archive_path.split("/")[-1]
@@ -45,7 +46,7 @@ def do_deploy(archive_path):
 
 
 def deploy():
-    """creates and distributes an archive to the web servers"""
+    """Creates and distributes an archive to the web servers"""
     archive_path = do_pack()
     if archive_path is None:
         return False
