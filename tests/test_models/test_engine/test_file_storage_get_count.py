@@ -1,13 +1,8 @@
-#!/usr/bin/python3
-"""Test .get() and .count() methods"""
-
 import unittest
 from models import storage
 from models.state import State
 
-class TestGetCountMethods(unittest.TestCase):
-    """Test cases for get() and count() methods"""
-
+class TestFileStorageGetCountMethods(unittest.TestCase):
     def test_get(self):
         """Test the get() method."""
         # Create a new State object and add it to storage
@@ -41,4 +36,3 @@ class TestGetCountMethods(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
-
